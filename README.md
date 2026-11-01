@@ -1,54 +1,53 @@
-# React + TypeScript + Vite
+# Instant Democracy · prototype
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A mobile prototype for Instant Democracy: small groups (a shared flat, a club, friends) turn a shared concern into a decision. Someone raises an issue, the group discusses it, votes, and the decision says who takes care of it.
 
-Currently, two official plugins are available:
+Experience Design group project, University of Coimbra, 2026.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Every design choice is explained in [`docs/DECISIONS.md`](docs/DECISIONS.md)**, linked to the user-test findings. Commit messages explain the why of each step.
 
-## Expanding the ESLint configuration
+## Run it
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open the link Vite prints. On a laptop the app shows inside an iPhone frame. On a phone (same Wi-Fi, use the "Network" link) it fills the screen.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Deploy to Vercel
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+1. Push this folder to a GitHub repository.
+2. In Vercel: **Add New → Project**, import the repository. Vercel detects Vite; no settings to change.
+3. Every push to `main` deploys again.
+
+## Testing tips
+
+- **Reset demo** (next to the phone frame) or open `/#/reset` on a phone to clear votes and comments between testers.
+- The test path: Home → Roommates → Broken fridge → vote.
+- Votes and comments are saved in the browser, so a refresh keeps them.
+
+## What's built
+
+| Screen | Status |
+| --- | --- |
+| Home (groups, bell, + New) | Done |
+| Notifications | Done |
+| Group (Open / Decided, members) | Done |
+| Discussion / poll with voting and comments | Done |
+| Create discussion, poll, group; join | Next step |
+| Group settings | Next step |
+
+## Structure
+
 ```
+src/
+  screens/      Home, Group, Thread (discussion or poll), Notifications
+  components/   PollCard, DeviceFrame (iPhone frame), sheets, buttons
+  data/         types, seed data, state (store), selectors
+  lib/          time and group helpers
+docs/
+  DECISIONS.md  why everything looks the way it does
+```
+
+Stack: Vite, React, TypeScript, Tailwind CSS, React Router, lucide icons, Outfit font.
