@@ -179,9 +179,7 @@ export function DeviceFrame({ children }: { children: ReactNode }) {
         <div>
           <p className="text-[13px] font-medium uppercase tracking-[0.14em] text-muted">Prototype · v3</p>
           <h1 className="mt-2 text-[34px] font-bold leading-[1.05] tracking-tight">Instant Democracy</h1>
-          <p className="mt-3 text-[16px] leading-relaxed text-muted">
-            Tap through it like on a phone. Open the same link on a phone to test it full screen.
-          </p>
+          <p className="mt-3 text-[16px] text-muted">1 November 2026</p>
         </div>
         <div>
           <ResetButton />
