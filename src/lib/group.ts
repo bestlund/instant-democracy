@@ -22,7 +22,7 @@ export function groupStatus(state: AppState, group: Group): { text: string; stro
     .sort((a, b) => a.p.closesAt - b.p.closesAt)
   if (pending.length) {
     const { t, p } = pending[0]
-    return { text: `Vote on ${t.title} · ${lower(deadline(p.closesAt))}`, strong: true }
+    return { text: `Vote on ${t.title}, ${lower(deadline(p.closesAt))}`, strong: true }
   }
   const unread = threads.filter((t) => t.unread > 0).sort((a, b) => b.unread - a.unread)
   if (unread.length) {

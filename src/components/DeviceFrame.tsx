@@ -177,9 +177,11 @@ export function DeviceFrame({ children }: { children: ReactNode }) {
 
       <aside className="hidden max-w-[300px] flex-col gap-5 lg:flex">
         <div>
-          <p className="text-[13px] font-medium uppercase tracking-[0.14em] text-muted">Prototype · v3</p>
-          <h1 className="mt-2 text-[34px] font-bold leading-[1.05] tracking-tight">Instant Democracy</h1>
-          <p className="mt-3 text-[16px] text-muted">1 November 2026</p>
+          <p className="inline-flex gap-3 rounded-lg bg-fill px-2.5 py-1 text-[13px] font-medium uppercase tracking-[0.14em] text-muted">
+            <span>Prototype v3</span>
+            <span>1 Nov 2026</span>
+          </p>
+          <h1 className="mt-3 text-[34px] font-bold leading-[1.05] tracking-tight">Instant Democracy</h1>
         </div>
         <div>
           <ResetButton />

@@ -33,14 +33,7 @@ export default function Home() {
     <Screen
       header={
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-ink text-white" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 18 18">
-                <path d="M4 9.5l3.2 3.2L14 5.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
-            <span className="text-[17px] font-semibold tracking-tight">Instant democracy</span>
-          </div>
+          <h1 className="text-[34px] font-bold leading-none tracking-tight">Your groups</h1>
           <IconButton label="Notifications" badge={unreadNotifications} onClick={() => navigate('/notifications')}>
             <Bell size={20} strokeWidth={1.8} aria-hidden="true" />
           </IconButton>
@@ -83,8 +76,7 @@ export default function Home() {
         </Sheet>
       }
     >
-      <div className="px-5 pb-6">
-        <h1 className="mb-5 mt-7 text-[34px] font-bold leading-none tracking-tight">Your groups</h1>
+      <div className="px-5 pb-6 pt-5">
         <ul className="flex flex-col gap-3">
           {groups.map(({ g, attention, status }) => (
             <li key={g.id}>

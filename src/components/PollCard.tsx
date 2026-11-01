@@ -8,7 +8,7 @@ import { Avatar, Chip, PrimaryButton, Segmented, cx } from './ui'
 
 // The poll, inside a discussion or as the start of a poll thread (D7).
 //
-// Results are hidden until you vote (D12): if you can see that Tom already
+// Results are hidden until you vote (D12): if you can see that Gytis already
 // has two votes, you're likely to follow the group instead of choosing
 // for yourself. After voting the full result is shown.
 //
@@ -73,7 +73,7 @@ export function PollCard({ poll, group }: { poll: Poll; group: Group }) {
       <div className="flex items-center justify-between gap-2">
         <Chip solid={pending && isUrgent(poll.closesAt)}>
           <Vote size={15} strokeWidth={1.9} aria-hidden="true" />
-          Poll · {deadline(poll.closesAt).replace('Closes', 'closes')}
+          {deadline(poll.closesAt)}
         </Chip>
         <span className="truncate text-[13px] text-muted">by {author}</span>
       </div>
@@ -178,7 +178,7 @@ export function PollCard({ poll, group }: { poll: Poll; group: Group }) {
                   </div>
                   <p className="mt-1 text-[13px] text-muted">
                     {votes.length} {votes.length === 1 ? 'vote' : 'votes'}
-                    {who && ` · ${who}`}
+                    {who && ` (${who})`}
                   </p>
                 </li>
               )

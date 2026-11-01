@@ -32,7 +32,7 @@ function ThreadCard({ thread, members, onOpen }: { thread: Thread; members: numb
         {poll ? (
           <Chip solid={urgent}>
             <Vote size={15} strokeWidth={1.9} aria-hidden="true" />
-            {pending ? 'Vote' : 'Voting'} · {deadline(poll.closesAt).replace('Closes', 'closes')}
+            {deadline(poll.closesAt)}
           </Chip>
         ) : (
           <Chip>
@@ -46,15 +46,15 @@ function ThreadCard({ thread, members, onOpen }: { thread: Thread; members: numb
       <p className="mt-1 text-[14px] text-muted">
         {poll ? (
           <>
-            {poll.votes.length} of {members} voted ·{' '}
-            {pending ? <span className="font-medium text-ink">you haven’t voted</span> : 'you voted'}
+            {poll.votes.length} of {members} voted,{' '}
+            {pending ? <span className="font-medium text-ink">not you yet</span> : 'including you'}
           </>
         ) : (
           <>
-            {comments} comments
+            {comments} {comments === 1 ? 'comment' : 'comments'}
             {thread.unread > 0 && (
               <>
-                {' · '}
+                {', '}
                 <span className="font-medium text-ink">{thread.unread} new</span>
               </>
             )}
@@ -73,7 +73,7 @@ function DecidedCard({ thread }: { thread: Thread }) {
     <div className="rounded-card bg-card p-4 shadow-card">
       <Chip>
         <Check size={15} strokeWidth={2} aria-hidden="true" />
-        Decided · {shortDate(d.decidedAt)}
+        Decided {shortDate(d.decidedAt)}
       </Chip>
       <h3 className="mt-3 text-[19px] font-semibold leading-tight">{thread.title}</h3>
       <p className="mt-1 text-[16px] text-ink">{d.outcome}</p>

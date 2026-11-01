@@ -11,24 +11,18 @@ const DAY = 24 * HOUR
 
 const people: Member[] = [
   { id: 'me', name: 'You' },
-  { id: 'lea', name: 'Lea' },
-  { id: 'tom', name: 'Tom' },
-  { id: 'anna', name: 'Anna' },
-  { id: 'marco', name: 'Marco' },
-  { id: 'sofia', name: 'Sofia' },
-  { id: 'joao', name: 'João' },
-  { id: 'ines', name: 'Inês' },
-  { id: 'pedro', name: 'Pedro' },
-  { id: 'clara', name: 'Clara' },
-  { id: 'yuki', name: 'Yuki' },
-  { id: 'ben', name: 'Ben' },
-  { id: 'eva', name: 'Eva' },
+  { id: 'jacob', name: 'Jacob' },
+  { id: 'gytis', name: 'Gytis' },
+  { id: 'elizabeth', name: 'Elizabeth' },
+  { id: 'elisabetta', name: 'Elisabetta' },
 ]
 
-const extraErasmus = Array.from({ length: 23 }, (_, i) => ({
-  id: `erasmus-${i}`,
+// Everyone outside the project group is a numbered student.
+const students = Array.from({ length: 30 }, (_, i) => ({
+  id: `student-${i}`,
   name: `Student ${i + 1}`,
 }))
+const studentIds = students.map((s) => s.id)
 
 function at(offset: number, base: number) {
   return base + offset
@@ -44,7 +38,7 @@ function tonight(now: number) {
 
 export function createSeed(now = Date.now()): AppState {
   const members = Object.fromEntries(
-    [...people, ...extraErasmus].map((m) => [m.id, m]),
+    [...people, ...students].map((m) => [m.id, m]),
   )
 
   return {
@@ -57,17 +51,17 @@ export function createSeed(now = Date.now()): AppState {
         name: 'Roommates',
         icon: 'home',
         members: [
-          { id: 'lea', role: 'owner' },
+          { id: 'elizabeth', role: 'owner' },
           { id: 'me', role: 'member' },
-          { id: 'tom', role: 'member' },
-          { id: 'anna', role: 'staff' },
+          { id: 'gytis', role: 'member' },
+          { id: 'elisabetta', role: 'staff' },
         ],
       },
       {
         id: 'run-club',
         name: 'Run club',
         icon: 'run',
-        members: ['marco', 'me', 'sofia', 'joao', 'ines', 'pedro', 'clara', 'yuki', 'ben', 'eva', 'anna', 'tom'].map(
+        members: ['jacob', 'me', 'gytis', 'elisabetta', ...studentIds.slice(0, 8)].map(
           (id, i) => ({ id, role: i === 0 ? ('owner' as const) : ('member' as const) }),
         ),
       },
@@ -76,13 +70,12 @@ export function createSeed(now = Date.now()): AppState {
         name: 'Erasmus friends',
         icon: 'plane',
         members: [
-          { id: 'sofia', role: 'owner' as const },
+          { id: 'elisabetta', role: 'owner' as const },
           { id: 'me', role: 'staff' as const },
-          ...['yuki', 'ben', 'eva', 'clara', 'pedro', 'ines', 'joao', 'marco', 'lea', 'tom'].map((id) => ({
+          ...['jacob', 'gytis', 'elizabeth', ...studentIds].map((id) => ({
             id,
             role: 'member' as const,
           })),
-          ...extraErasmus.map((m) => ({ id: m.id, role: 'member' as const })),
         ],
       },
     ],
@@ -90,37 +83,37 @@ export function createSeed(now = Date.now()): AppState {
       'p-fridge': {
         id: 'p-fridge',
         question: 'Who calls the landlord about the fridge?',
-        createdBy: 'lea',
+        createdBy: 'elizabeth',
         createdByVisibility: 'named',
         options: [
-          { id: 'o-lea', label: 'Lea' },
-          { id: 'o-tom', label: 'Tom' },
-          { id: 'o-anna', label: 'Anna' },
+          { id: 'o-elizabeth', label: 'Elizabeth' },
+          { id: 'o-gytis', label: 'Gytis' },
+          { id: 'o-elisabetta', label: 'Elisabetta' },
           { id: 'o-me', label: 'You' },
         ],
         votes: [
-          { voterId: 'lea', optionId: 'o-tom', visibility: 'named' },
-          { voterId: 'anna', optionId: 'o-tom', visibility: 'anonymous' },
+          { voterId: 'elizabeth', optionId: 'o-gytis', visibility: 'named' },
+          { voterId: 'elisabetta', optionId: 'o-gytis', visibility: 'anonymous' },
         ],
         closesAt: tonight(now),
       },
       'p-movie': {
         id: 'p-movie',
         question: 'Which film for movie night?',
-        createdBy: 'tom',
+        createdBy: 'gytis',
         createdByVisibility: 'named',
         options: [
           { id: 'o-dune', label: 'Dune: Part Two' },
           { id: 'o-amelie', label: 'Amélie' },
           { id: 'o-spirited', label: 'Spirited Away' },
         ],
-        votes: [{ voterId: 'tom', optionId: 'o-spirited', visibility: 'named' }],
+        votes: [{ voterId: 'gytis', optionId: 'o-spirited', visibility: 'named' }],
         closesAt: now + 3 * DAY,
       },
       'p-route': {
         id: 'p-route',
         question: 'Route for the Sunday run?',
-        createdBy: 'marco',
+        createdBy: 'jacob',
         createdByVisibility: 'named',
         options: [
           { id: 'o-river', label: 'River loop, 8 km' },
@@ -128,11 +121,11 @@ export function createSeed(now = Date.now()): AppState {
           { id: 'o-hill', label: 'Hill repeats, 5 km' },
         ],
         votes: [
-          { voterId: 'marco', optionId: 'o-river', visibility: 'named' },
-          { voterId: 'sofia', optionId: 'o-river', visibility: 'named' },
-          { voterId: 'joao', optionId: 'o-park', visibility: 'anonymous' },
-          { voterId: 'ines', optionId: 'o-river', visibility: 'named' },
-          { voterId: 'clara', optionId: 'o-hill', visibility: 'named' },
+          { voterId: 'jacob', optionId: 'o-river', visibility: 'named' },
+          { voterId: 'student-0', optionId: 'o-river', visibility: 'named' },
+          { voterId: 'student-1', optionId: 'o-park', visibility: 'anonymous' },
+          { voterId: 'student-2', optionId: 'o-river', visibility: 'named' },
+          { voterId: 'student-3', optionId: 'o-hill', visibility: 'named' },
         ],
         closesAt: now + 2 * DAY,
       },
@@ -150,7 +143,7 @@ export function createSeed(now = Date.now()): AppState {
             kind: 'message',
             message: {
               id: 'm1',
-              authorId: 'anna',
+              authorId: 'elisabetta',
               visibility: 'anonymous',
               text: "The fridge hasn't been cooling for two days. My milk went off again.",
               at: at(-26 * HOUR, now),
@@ -160,7 +153,7 @@ export function createSeed(now = Date.now()): AppState {
             kind: 'message',
             message: {
               id: 'm2',
-              authorId: 'tom',
+              authorId: 'gytis',
               visibility: 'named',
               text: 'Same here, and the freezer is full of water.',
               at: at(-25 * HOUR, now),
@@ -170,7 +163,7 @@ export function createSeed(now = Date.now()): AppState {
             kind: 'message',
             message: {
               id: 'm3',
-              authorId: 'lea',
+              authorId: 'elizabeth',
               visibility: 'named',
               text: "Someone should call the landlord. Let's decide who, so it actually happens this time.",
               at: at(-3 * HOUR, now),
@@ -181,9 +174,9 @@ export function createSeed(now = Date.now()): AppState {
             kind: 'message',
             message: {
               id: 'm4',
-              authorId: 'anna',
+              authorId: 'elisabetta',
               visibility: 'named',
-              text: 'Voted. Tom has the landlord’s number already.',
+              text: 'Voted. Gytis has the landlord’s number already.',
               at: at(-40 * MIN, now),
             },
           },
@@ -202,7 +195,7 @@ export function createSeed(now = Date.now()): AppState {
             kind: 'message',
             message: {
               id: 'm5',
-              authorId: 'tom',
+              authorId: 'gytis',
               visibility: 'named',
               text: 'Saturday at 20:00 in the living room. I’ll bring popcorn.',
               at: at(-5 * HOUR + 3 * MIN, now),
@@ -218,12 +211,12 @@ export function createSeed(now = Date.now()): AppState {
         startedAt: at(-2 * DAY, now),
         unread: 2,
         items: [
-          ['lea', 'I can cook on Friday. Pasta or curry?'],
-          ['tom', 'Curry!'],
-          ['anna', 'Pasta, but I’m happy either way.'],
-          ['lea', 'Let’s keep talking, I’ll make a poll tomorrow.'],
-          ['tom', 'I’ll buy the rice if it’s curry.'],
-          ['anna', 'Can we eat at 19:30? I have class until 19.'],
+          ['elizabeth', 'I can cook on Friday. Pasta or curry?'],
+          ['gytis', 'Curry!'],
+          ['elisabetta', 'Pasta, but I’m happy either way.'],
+          ['elizabeth', 'Let’s keep talking, I’ll make a poll tomorrow.'],
+          ['gytis', 'I’ll buy the rice if it’s curry.'],
+          ['elisabetta', 'Can we eat at 19:30? I have class until 19.'],
         ].map(([authorId, text], i) => ({
           kind: 'message' as const,
           message: {
@@ -245,7 +238,7 @@ export function createSeed(now = Date.now()): AppState {
         items: [],
         decision: {
           outcome: 'A weekly rota, starting Monday',
-          responsibleId: 'lea',
+          responsibleId: 'elizabeth',
           done: true,
           decidedAt: at(-10 * DAY, now),
           votesCast: 4,
@@ -261,7 +254,7 @@ export function createSeed(now = Date.now()): AppState {
         items: [],
         decision: {
           outcome: 'Buy one at IKEA, split the cost',
-          responsibleId: 'tom',
+          responsibleId: 'gytis',
           done: false,
           decidedAt: at(-4 * DAY, now),
           votesCast: 3,
@@ -288,7 +281,7 @@ export function createSeed(now = Date.now()): AppState {
             kind: 'message',
             message: {
               id: 'pt1',
-              authorId: 'sofia',
+              authorId: 'elisabetta',
               visibility: 'named',
               text: 'Who’s in for Porto in two weeks? Train is 1 hour.',
               at: at(-3 * DAY, now),
@@ -302,7 +295,7 @@ export function createSeed(now = Date.now()): AppState {
         id: 'n1',
         groupId: 'roommates',
         threadId: 'broken-fridge',
-        text: 'Lea started a poll: Who calls the landlord about the fridge?',
+        text: 'Elizabeth started a poll: Who calls the landlord about the fridge?',
         at: at(-3 * HOUR, now),
         read: false,
       },
@@ -318,7 +311,7 @@ export function createSeed(now = Date.now()): AppState {
         id: 'n3',
         groupId: 'run-club',
         threadId: 'sunday-route',
-        text: 'Marco started a poll: Route for the Sunday run?',
+        text: 'Jacob started a poll: Route for the Sunday run?',
         at: at(-7 * HOUR, now),
         read: false,
       },
@@ -326,7 +319,7 @@ export function createSeed(now = Date.now()): AppState {
         id: 'n4',
         groupId: 'roommates',
         threadId: 'cleaning-rota',
-        text: 'Decided: a weekly cleaning rota. Lea takes care of it.',
+        text: 'Decided: a weekly cleaning rota. Elizabeth takes care of it.',
         at: at(-10 * DAY, now),
         read: true,
       },

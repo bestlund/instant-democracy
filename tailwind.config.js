@@ -25,7 +25,8 @@ export default {
         card: '22px',
       },
       boxShadow: {
-        card: '0 1px 2px rgba(10,10,10,0.04), 0 4px 16px rgba(10,10,10,0.04)',
+        // The 1px ring is a subtle outline so white cards don't melt into the canvas.
+        card: '0 0 0 1px #E4E4E7,0 1px 2px rgba(10,10,10,0.04), 0 4px 16px rgba(10,10,10,0.04)',
         sheet: '0 -8px 32px rgba(10,10,10,0.12)',
       },
     },

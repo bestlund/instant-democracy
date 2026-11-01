@@ -16,7 +16,7 @@ import { dayLabel, timeOfDay } from '../lib/time'
 function Bubble({ message, mine }: { message: Message; mine: boolean }) {
   const { state } = useStore()
   const anon = message.visibility === 'anonymous'
-  const name = mine ? (anon ? 'You · anonymously' : 'You') : anon ? 'Anonymous' : memberName(state, message.authorId)
+  const name = mine ? (anon ? 'You (anonymous)' : 'You') : anon ? 'Anonymous' : memberName(state, message.authorId)
 
   return (
     <div className={cx('flex items-end gap-2', mine && 'flex-row-reverse')}>
@@ -24,7 +24,8 @@ function Bubble({ message, mine }: { message: Message; mine: boolean }) {
       <div className={cx('flex max-w-[78%] flex-col', mine ? 'items-end' : 'items-start')}>
         <span className="mb-1 flex items-center gap-1 px-1 text-[12px] font-medium text-muted">
           {anon && <VenetianMask size={13} strokeWidth={1.8} aria-hidden="true" />}
-          {name} · {timeOfDay(message.at)}
+          {name}
+          <span className="ml-1 font-normal text-muted-light">{timeOfDay(message.at)}</span>
         </span>
         <p
           className={cx(
@@ -95,7 +96,7 @@ export default function ThreadScreen() {
           <div className="min-w-0">
             <h1 className="truncate text-[19px] font-semibold leading-tight">{thread.title}</h1>
             <p className="text-[13px] text-muted">
-              {group.name} · {thread.type === 'poll' ? 'Poll' : 'Discussion'}
+              {thread.type === 'poll' ? 'Poll' : 'Discussion'} in {group.name}
             </p>
           </div>
         </div>

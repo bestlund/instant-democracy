@@ -46,8 +46,9 @@ export default function Notifications() {
           </span>
           <span className="min-w-0 flex-1">
             <span className={cx('block text-[16px] leading-snug', !n.read && 'font-semibold')}>{n.text}</span>
-            <span className="mt-1 block text-[13px] text-muted">
-              {group?.name} · {ago(n.at)}
+            <span className="mt-1 flex gap-2 text-[13px] text-muted">
+              <span>{group?.name}</span>
+              <span className="text-muted-light">{ago(n.at)}</span>
             </span>
           </span>
           {!n.read && <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-ink" aria-label="New" />}

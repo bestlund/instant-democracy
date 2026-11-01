@@ -6,7 +6,7 @@ import type { AppState, Visibility } from './types'
 // vote or comment survives a page refresh. "Reset demo" restores the seed
 // between test sessions.
 
-const STORAGE_KEY = 'instant-democracy:v1'
+const STORAGE_KEY = 'instant-democracy:v2'
 
 type Action =
   | { type: 'vote'; pollId: string; optionId: string; visibility: Visibility }
