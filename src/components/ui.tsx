@@ -1,5 +1,5 @@
 import { useEffect, type ButtonHTMLAttributes, type ReactNode } from 'react'
-import { X } from 'lucide-react'
+import { User, X } from 'lucide-react'
 
 // Shared building blocks. One black primary action per screen, everything
 // else white or quiet grey (D1).
@@ -113,18 +113,24 @@ export function Avatar({
   ring?: boolean
   anonymous?: boolean
 }) {
-  const initials = anonymous ? '?' : name === 'You' ? 'You' : name.slice(0, 1).toUpperCase()
+  // The current user gets an outlined avatar with a person icon, so "you"
+  // stands out in a row of other people's initials.
+  const me = name === 'You'
   return (
     <span
       aria-hidden="true"
       className={cx(
         'grid shrink-0 place-items-center rounded-full font-semibold',
-        dim ? 'border border-dashed border-muted-light bg-card text-muted' : 'bg-ink text-white',
+        dim
+          ? 'border border-dashed border-muted bg-card text-muted'
+          : me
+            ? 'border-[1.5px] border-ink bg-card text-ink'
+            : 'bg-ink text-white',
         ring && 'ring-2 ring-canvas',
       )}
-      style={{ width: size, height: size, fontSize: initials.length > 1 ? size * 0.32 : size * 0.42 }}
+      style={{ width: size, height: size, fontSize: size * 0.42 }}
     >
-      {initials}
+      {me ? <User size={size * 0.52} strokeWidth={2} /> : anonymous ? '?' : name.slice(0, 1).toUpperCase()}
     </span>
   )
 }
