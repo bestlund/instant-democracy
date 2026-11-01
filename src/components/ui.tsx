@@ -42,7 +42,7 @@ export function IconButton({
       type="button"
       aria-label={badge ? `${label}, ${badge} new` : label}
       className={cx(
-        'relative grid h-11 w-11 shrink-0 place-items-center rounded-full bg-card text-ink shadow-card transition active:scale-95',
+        'relative grid h-11 w-11 shrink-0 place-items-center rounded-full bg-card text-ink border border-line shadow-card transition active:scale-95',
         className,
       )}
       {...rest}
@@ -77,7 +77,7 @@ export function SecondaryButton({ children, className, ...rest }: ButtonHTMLAttr
     <button
       type="button"
       className={cx(
-        'flex h-14 w-full items-center justify-center gap-2 rounded-full bg-card text-[17px] font-medium text-ink shadow-card transition active:scale-[0.98]',
+        'flex h-14 w-full items-center justify-center gap-2 rounded-full bg-card text-[17px] font-medium text-ink border border-line shadow-card transition active:scale-[0.98]',
         className,
       )}
       {...rest}
@@ -176,7 +176,7 @@ export function Segmented<T extends string>({
             onClick={() => onChange(o.value)}
             className={cx(
               'flex h-10 flex-1 items-center justify-center gap-1.5 rounded-full text-[15px] font-medium transition',
-              active ? 'bg-card text-ink shadow-card' : 'text-muted',
+              active ? 'bg-card text-ink ring-1 ring-line' : 'text-muted',
             )}
           >
             {o.label}
@@ -250,7 +250,7 @@ export function ActionRow({
     <button
       type="button"
       onClick={onClick}
-      className="flex w-full items-center gap-4 rounded-card bg-card p-4 text-left shadow-card transition active:scale-[0.99]"
+      className="flex w-full items-center gap-4 rounded-card bg-card p-4 text-left border border-line shadow-card transition active:scale-[0.99]"
     >
       <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-ink text-white">{icon}</span>
       <span className="min-w-0 flex-1">

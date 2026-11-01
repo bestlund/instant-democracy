@@ -26,7 +26,7 @@ function ThreadCard({ thread, members, onOpen }: { thread: Thread; members: numb
     <button
       type="button"
       onClick={onOpen}
-      className="w-full rounded-card bg-card p-4 text-left shadow-card transition active:scale-[0.99]"
+      className="w-full rounded-card bg-card p-4 text-left border border-line shadow-card transition active:scale-[0.99]"
     >
       <div className="flex items-center justify-between">
         {poll ? (
@@ -70,7 +70,7 @@ function DecidedCard({ thread }: { thread: Thread }) {
   const d = thread.decision!
   const who = memberName(state, d.responsibleId)
   return (
-    <div className="rounded-card bg-card p-4 shadow-card">
+    <div className="rounded-card bg-card p-4 border border-line shadow-card">
       <Chip>
         <Check size={15} strokeWidth={2} aria-hidden="true" />
         Decided {shortDate(d.decidedAt)}
@@ -185,7 +185,7 @@ export default function Group() {
                 </li>
               ))
             ) : (
-              <li className="rounded-card bg-card p-6 text-center shadow-card">
+              <li className="rounded-card bg-card p-6 text-center border border-line shadow-card">
                 <p className="text-[17px] font-semibold">Nothing open right now</p>
                 <p className="mt-1 text-[15px] text-muted">Something bothering you? Start a discussion.</p>
               </li>

@@ -34,7 +34,7 @@ export default function Notifications() {
         <button
           type="button"
           onClick={() => open(n)}
-          className="flex w-full items-start gap-3 rounded-card bg-card p-4 text-left shadow-card transition active:scale-[0.99]"
+          className="flex w-full items-start gap-3 rounded-card bg-card p-4 text-left border border-line shadow-card transition active:scale-[0.99]"
         >
           <span
             className={cx(

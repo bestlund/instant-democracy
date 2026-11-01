@@ -30,7 +30,7 @@ function Bubble({ message, mine }: { message: Message; mine: boolean }) {
         <p
           className={cx(
             'whitespace-pre-wrap rounded-[20px] px-4 py-2.5 text-[16px] leading-snug',
-            mine ? 'rounded-br-md bg-ink text-white' : 'rounded-bl-md bg-card text-ink shadow-card',
+            mine ? 'rounded-br-md bg-ink text-white' : 'rounded-bl-md bg-card text-ink border border-line shadow-card',
           )}
         >
           {message.text}
@@ -132,7 +132,7 @@ export default function ThreadScreen() {
               onChange={(e) => setText(e.target.value)}
               placeholder="Write a comment…"
               autoComplete="off"
-              className="h-12 min-w-0 flex-1 rounded-full bg-card px-4 text-[16px] text-ink shadow-card outline-none placeholder:text-muted-light focus:ring-2 focus:ring-ink"
+              className="h-12 min-w-0 flex-1 rounded-full bg-card px-4 text-[16px] text-ink border border-line shadow-card outline-none placeholder:text-muted-light focus:ring-2 focus:ring-ink"
             />
             <button
               type="submit"

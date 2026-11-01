@@ -13,7 +13,7 @@ export function MembersSheet({ group, open, onClose }: { group: Group; open: boo
   })
   return (
     <Sheet open={open} onClose={onClose} title={`${group.members.length} members`}>
-      <ul className="max-h-[420px] overflow-y-auto rounded-card bg-card shadow-card">
+      <ul className="max-h-[420px] overflow-y-auto rounded-card bg-card border border-line shadow-card">
         {sorted.map((m, i) => {
           const name = state.members[m.id]?.name ?? 'Member'
           return (

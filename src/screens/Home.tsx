@@ -83,7 +83,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => navigate(`/g/${g.id}`)}
-                className="flex w-full items-center gap-4 rounded-card bg-card p-4 text-left shadow-card transition active:scale-[0.99]"
+                className="flex w-full items-center gap-4 rounded-card bg-card p-4 text-left border border-line shadow-card transition active:scale-[0.99]"
               >
                 <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-ink text-white">
                   <GroupIconGlyph icon={g.icon} size={24} />

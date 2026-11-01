@@ -69,7 +69,7 @@ export function PollCard({ poll, group }: { poll: Poll; group: Group }) {
   }
 
   return (
-    <section aria-label={`Poll: ${poll.question}`} className="rounded-card bg-card p-4 shadow-card">
+    <section aria-label={`Poll: ${poll.question}`} className="rounded-card bg-card p-4 border border-line shadow-card">
       <div className="flex items-center justify-between gap-2">
         <Chip solid={pending && isUrgent(poll.closesAt)}>
           <Vote size={15} strokeWidth={1.9} aria-hidden="true" />
